@@ -42,13 +42,7 @@ Enabled, checking Windows applications and malware indicators against Wazuh's de
 
 ## Detection demo
 
-A test file was created, modified, and deleted inside the monitored directory to trigger and verify FIM alerts:
-
-```powershell
-echo "test" > C:\Users\Public\test.txt
-echo "change" >> C:\Users\Public\test.txt
-del C:\Users\Public\test.txt
-```
+A test file was created, modified, and deleted at `C:\Users\Public\test.txt` to trigger FIM alerts:
 
 This produced three real alerts on the manager, visible in the Wazuh dashboard:
 
@@ -75,6 +69,11 @@ Old md5sum was: '4582c40a0b89549aa5eae9dc756985ec'
 ```
 
 Wazuh's built-in rule mapping already tags this event against GDPR and HIPAA compliance references — visible directly in the alert metadata above, no manual mapping needed for those two.
+
+### Analyst notes
+- **Why it matters:** FIM detects attacker behaviour such as dropping tools, tampering with configs, or deleting evidence. Relevant MITRE ATT&CK techniques: T1565.001 (Stored Data Manipulation) and T1070.004 (File Deletion).
+- **Config vs. result mismatch:** the real-time FIM rule targets `C:\Users\Public\Test`, but the test file was written to `C:\Users\Public\test.txt`, outside that folder, and alerts still fired. I didn't confirm the root cause before the lab was torn down. Possible causes are a path-matching quirk in real-time monitoring or another monitored path covering it. Next step: re-test inside the configured directory and expect the full added (554) → modified (550) → deleted (553) sequence.
+- **What I'd check in a real SOC:** who made the change (enable `whodata` for user and process attribution), whether it fell inside a change window, and the file hash against known-good and known-bad.
 
 ---
 
