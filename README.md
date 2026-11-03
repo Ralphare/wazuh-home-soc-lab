@@ -44,6 +44,13 @@ Enabled, checking Windows applications and malware indicators against Wazuh's de
 
 A test file was created, modified, and deleted at `C:\Users\Public\test.txt` to trigger FIM alerts:
 
+```
+powershell
+echo "test" > C:\Users\Public\test.txt
+echo "change" >> C:\Users\Public\test.txt
+del C:\Users\Public\test.txt
+```
+
 This produced three real alerts on the manager, visible in the Wazuh dashboard:
 
 | Timestamp | Event | Rule ID | Rule description | Level |
