@@ -44,8 +44,7 @@ Enabled, checking Windows applications and malware indicators against Wazuh's de
 
 A test file was created, modified, and deleted at `C:\Users\Public\test.txt` to trigger FIM alerts:
 
-```
-powershell
+```powershell
 echo "test" > C:\Users\Public\test.txt
 echo "change" >> C:\Users\Public\test.txt
 del C:\Users\Public\test.txt
