@@ -52,6 +52,8 @@ del C:\Users\Public\test.txt
 
 This produced three real alerts on the manager, visible in the Wazuh dashboard:
 
+![FIM events for the test file in the Wazuh dashboard](Screenshots/Events%20in%20File%20Integrity%20Monitoring.png)
+
 | Timestamp | Event | Rule ID | Rule description | Level |
 |---|---|---|---|---|
 | 02:51:52 | modified | 550 | Integrity checksum changed | 7 |
@@ -59,6 +61,8 @@ This produced three real alerts on the manager, visible in the Wazuh dashboard:
 | 02:52:10 | deleted | 553 | File deleted | 7 |
 
 Full alert detail for one of the modification events (`c:\users\public\test.txt`):
+
+![Full alert detail for rule 550](Screenshots/Details%20of%20the%20file%20change%20event.png)
 
 ```
 decoder.name: syscheck_integrity_changed
@@ -85,6 +89,8 @@ Wazuh's built-in rule mapping already tags this event against GDPR and HIPAA com
 
 ## Dashboard views
 
+![Agent dashboard with MITRE ATT&CK tactics, compliance and SCA](Screenshots/Windows%20Agent%20Details.png)
+
 - **Endpoints summary** — confirms agent `WINDOWS22` (005) active, Wazuh v4.12.0, group `default`
 - **Agent overview** — MITRE ATT&CK tactic breakdown for the agent (Impact, Defense Evasion, Initial Access, Persistence hits from the default ruleset), plus PCI DSS compliance rollup
 - **Events count evolution** — alert volume over time for the agent
@@ -93,7 +99,7 @@ Wazuh's built-in rule mapping already tags this event against GDPR and HIPAA com
 
 ## Screenshots
 
-See the [`Screenshots`](./Screenshots) folder:
+All screenshots are in the [`Screenshots`](./Screenshots) folder:
 
 | File | Shows |
 |---|---|
@@ -102,7 +108,7 @@ See the [`Screenshots`](./Screenshots) folder:
 | `Creation of test file.png` | Monitored directory with test file created |
 | `Details of the file change event.png` | Full alert detail for a FIM modification event (rule 550) |
 | `Endpoints(1 active agent).png` | Agent registration and active status |
-| `Events in File Intgrity Monitoring....png` | FIM event table — create/modify/delete detections |
+| `Events in File Integrity Monitoring.png` | FIM event table — create/modify/delete detections |
 | `Overview.png` | Wazuh platform dashboard (agent summary, alert severity breakdown) |
 | `Windows Agent Details.png` | Agent-specific dashboard — MITRE ATT&CK, SCA, compliance |
 | `Windows powershell.png` | Commands used to trigger the test FIM events |
